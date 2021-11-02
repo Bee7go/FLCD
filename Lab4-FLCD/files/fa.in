@@ -1,0 +1,11 @@
+states = A B C
+alphabet = 0 1
+q0 = A
+final_states = A C
+transitions =
+	(A, 0) -> A
+	(A, 1) -> C
+	(B, 0) -> B
+	(B, 1) -> A
+    (C, 0) -> C
+    (C, 1) -> B
