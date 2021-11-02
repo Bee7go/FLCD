@@ -4,7 +4,7 @@ from FiniteAutomata import FiniteAutomata
 class Console:
 
     def __read_fa(self):
-        self.fa = FiniteAutomata.readFromFile('files/fa2.in')
+        self.fa = FiniteAutomata.readFromFile('files/fa.in')
 
     def __display_all(self):
         print(self.fa)
