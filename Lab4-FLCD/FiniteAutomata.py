@@ -13,7 +13,6 @@ class FiniteAutomata:
 
     @staticmethod
     def readFromFile(fileName):
-        #take into consideration duplicates
         with open(fileName) as file:
             states = FiniteAutomata.getLine(file.readline())
             alphabet = FiniteAutomata.getLine(file.readline())
@@ -27,10 +26,11 @@ class FiniteAutomata:
                 dst = line.strip().split('->')[1].strip()
 
                 if (src, route) in transitions.keys():
-                    transitions[(src, route)].append(dst)
+                    # take into consideration duplicates:
+                    if dst not in transitions[(src, route)]:
+                        transitions[(src, route)].append(dst)
                 else:
                     transitions[(src, route)] = [dst]
-
             return FiniteAutomata(states, alphabet, q0, final_states, transitions)
 
     def isDfa(self):
@@ -38,6 +38,17 @@ class FiniteAutomata:
             if len(self.transitions[k]) > 1:
                 return False
         return True
+
+    def isAccepted(self, sequence):
+        if self.isDfa():
+            current = self.q0
+            for symbol in sequence:
+                if (current, symbol) in self.transitions.keys():
+                    current = self.transitions[(current, symbol)][0]
+                else:
+                    return False
+            return current in self.final_states
+        return False
 
     def __str__(self):
         return "states = { " + ', '.join(self.states) + " }\n" \

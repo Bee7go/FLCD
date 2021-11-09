@@ -24,6 +24,11 @@ class Console:
     def __dfa(self):
         print(self.fa.isDfa())
 
+    def __isAccepted(self):
+        sequence = input('Read sequence>>')
+        print(self.fa.isAccepted(sequence))
+
+
     def run(self):
         self.__read_fa()
         commands = {'1': self.__display_all,
@@ -31,7 +36,8 @@ class Console:
                     '3': self.__display_alphabet,
                     '4': self.__display_transitions,
                     '5': self.__display_final_states,
-                    '6': self.__dfa}
+                    '6': self.__dfa,
+                    '7': self.__isAccepted}
         ok = False
         while not ok:
             print("1.Display FA")
@@ -40,6 +46,7 @@ class Console:
             print("4.Display FA transitions")
             print("5.Display FA final states")
             print("6.Check DFA")
+            print("7.Check if is accepted")
             print(">>")
             cmd = input()
             if cmd in commands.keys():
