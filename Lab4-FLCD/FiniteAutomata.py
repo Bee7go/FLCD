@@ -22,7 +22,7 @@ class FiniteAutomata:
             transitions = {}
             for line in file:
                 src = line.strip().split('->')[0].strip().replace('(', '').replace(')', '').split(',')[0]
-                route = line.strip().split('->')[0].strip().replace('(', '').replace(')', '').split(',')[1]
+                route = line.strip().split('->')[0].strip().replace('(', '').replace(')', '').split(', ')[1]
                 dst = line.strip().split('->')[1].strip()
 
                 if (src, route) in transitions.keys():
@@ -43,6 +43,7 @@ class FiniteAutomata:
         if self.isDfa():
             current = self.q0
             for symbol in sequence:
+                print(current, symbol)
                 if (current, symbol) in self.transitions.keys():
                     current = self.transitions[(current, symbol)][0]
                 else:
