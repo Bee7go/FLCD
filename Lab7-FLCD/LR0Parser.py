@@ -380,6 +380,7 @@ class Lr0Parser:
     """
 
     def parse_string(self, s):
+        print(s)
         self.canonical_collection()
         print(s)
         string = s + "$"
@@ -402,6 +403,10 @@ class Lr0Parser:
                 working_stack.append(pop)
                 working_stack.append(intersection)
             else:
+                new_queue = []
+                new_queue.append(pop)
+                new_queue = new_queue + queue
+                queue = new_queue
                 # this means that the intersection is a reduce
                 production_index = int(intersection.replace("r", ""))
                 output_band.insert(0, production_index)
